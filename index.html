@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trust Creator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="app">
+
+    <h1>TRUST CREATOR</h1>
+    <p class="subtitle">Экосистема доверия</p>
+
+    <div id="screen-role" class="screen active">
+      <h2>Кто ты?</h2>
+      <button onclick="selectRole('fan')">🎧 Фанат</button>
+      <button onclick="selectRole('artist')">🎤 Артист</button>
+    </div>
+
+    <div id="screen-dashboard" class="screen">
+      <h2 id="role-title"></h2>
+
+      <div class="card">
+        <p>Trust</p>
+        <div id="trust-value" class="big">1</div>
+      </div>
+
+      <div class="card">
+        <p>ART (активы)</p>
+        <div id="art-value" class="big">0</div>
+      </div>
+
+      <button onclick="buyTrust()">Купить Trust</button>
+      <button onclick="buyArt()">Поддержать артиста (ART)</button>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
