@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                     Int                 @id @default(autoincrement())
+  tgId                   String              @unique
+  role                   Role
+  trustAccessExpiresAt   DateTime?
+  allocations            TrustAllocation[]
+  starPayments           StarPayment[]
+}
+
+model Artist {
+  id            Int               @id @default(autoincrement())
+  userId        Int               @unique
+  name          String
+  trustScore    Int               @default(0)
+  trustVelocity Int               @default(0)
+  trustRank     Int               @default(0)
+  rewardPool    Int               @default(0)
+  user          User              @relation(fields: [userId], references: [id])
+  allocations   TrustAllocation[]
+  rewards       ArtistReward[]
+  charts        Chart[]
+}
+
+model TrustAllocation {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  artistId   Int
+  tauAmount  Int
+  updatedAt  DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  artist Artist @relation(fields: [artistId], references: [id])
+
+  @@unique([userId, artistId])
+}
+
+model StarPayment {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  starsAmount Int
+  month       String
+  status      PaymentStatus
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model ArtistReward {
+  id          Int      @id @default(autoincrement())
+  artistId    Int
+  starsEarned Int
+  month       String
+  paidOut     Boolean  @default(false)
+
+  artist Artist @relation(fields: [artistId], references: [id])
+}
+
+model Chart {
+  id          Int      @id @default(autoincrement())
+  artistId    Int
+  trustScore  Int
+  rank        Int
+  date        DateTime
+
+  artist Artist @relation(fields: [artistId], references: [id])
+}
+
+enum Role {
+  FAN
+  ARTIST
+  ADMIN
+}
+
+enum PaymentStatus {
+  PAID
+  EXPIRED
+}

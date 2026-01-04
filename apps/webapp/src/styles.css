@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+  font-family: 'Press Start 2P', 'VT323', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #120f1a;
+  background: #0f0a1d;
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 8px;
+  }
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 10% 20%, #20103b 0%, #0f0a1d 50%),
+    radial-gradient(circle at 90% 10%, #16233b 0%, #0f0a1d 40%),
+    #0f0a1d;
+  color: #ffd27f;
+  image-rendering: pixelated;
+  position: relative;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04) 50%, transparent 50%, transparent);
+  background-size: 100% 4px;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  animation: scanlines 1s steps(2) infinite;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
+  align-items: center;
+  background: linear-gradient(90deg, #ff4f88, #ffb347);
+  color: #1b0b28;
+  padding: 18px;
+  border: 4px solid #1b0b28;
+  box-shadow: 6px 6px 0 #120f1a, 12px 12px 0 rgba(0, 0, 0, 0.3);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  background: repeating-linear-gradient(45deg, #1b0b28 0, #1b0b28 6px, #120f1a 6px, #120f1a 12px);
+  color: #ffefb7;
+  border: 4px solid #1b0b28;
+  box-shadow: 4px 4px 0 #0a050f;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+h2 {
+  font-size: 14px;
+  margin: 12px 0 8px;
+  color: #ffefb7;
+  text-shadow: 2px 2px 0 #1b0b28;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: linear-gradient(180deg, #1e0f3a 0%, #0f0a1d 90%);
+  border: 4px solid #1b0b28;
+  padding: 16px;
+  box-shadow: 4px 4px 0 #ff4f88, 8px 8px 0 #120f1a;
+  color: #ffefb7;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.artist-name {
+  color: #79ffea;
+}
+
+.rank {
+  background: #ffefb7;
+  color: #1b0b28;
+  padding: 6px 12px;
+  border: 3px solid #1b0b28;
+  font-size: 12px;
+  box-shadow: 3px 3px 0 #ff4f88;
+}
+
+.metrics {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 12px;
+  color: #ffd27f;
+}
+
+.slider-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 16px;
+  background: repeating-linear-gradient(90deg, #ffd27f 0, #ffd27f 12px, #ffb347 12px, #ffb347 18px);
+  border: 3px solid #1b0b28;
+  box-shadow: 2px 2px 0 #ff4f88, 4px 4px 0 #120f1a;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 22px;
+  background: #79ffea;
+  border: 3px solid #1b0b28;
+  box-shadow: 2px 2px 0 #ffefb7;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 22px;
+  background: #79ffea;
+  border: 3px solid #1b0b28;
+  box-shadow: 2px 2px 0 #ffefb7;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: #1b0b28;
+  border: 4px solid #ffb347;
+  color: #ffefb7;
+  box-shadow: 4px 4px 0 #ff4f88;
+}
+
+button {
+  padding: 12px 18px;
+  border: 4px solid #1b0b28;
+  background: linear-gradient(180deg, #79ffea, #57c8b8);
+  color: #0b1021;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 #0b1021, 6px 6px 0 #ff4f88;
+}
+
+button:disabled {
+  background: #5d6575;
+  color: #cbd5e1;
+  cursor: not-allowed;
+  box-shadow: 4px 4px 0 #0b1021;
+}
+
+.status {
+  background: #0f0a1d;
+  border: 4px solid #79ffea;
+  color: #79ffea;
+  padding: 14px;
+  margin-top: 16px;
+  box-shadow: 4px 4px 0 #ff4f88;
+}

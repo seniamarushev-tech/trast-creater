@@ -1,0 +1,41 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: trust
+      POSTGRES_PASSWORD: trust
+      POSTGRES_DB: trust
+    ports:
+      - '5432:5432'
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+  api:
+    build: ../apps/api
+    environment:
+      DATABASE_URL: postgresql://trust:trust@postgres:5432/trust
+      API_PORT: 3001
+    depends_on:
+      - postgres
+    ports:
+      - '3001:3001'
+    command: sh -c "npm install && npx prisma migrate deploy && npm run start:dev"
+  bot:
+    build: ../apps/bot
+    environment:
+      BOT_TOKEN: your-bot-token
+      API_BASE: http://api:3001
+    depends_on:
+      - api
+    command: sh -c "npm install && npm run start:dev"
+  webapp:
+    build: ../apps/webapp
+    environment:
+      VITE_API_BASE: http://localhost:3001
+    ports:
+      - '4173:4173'
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 4173"
