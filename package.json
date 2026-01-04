@@ -1,0 +1,19 @@
+{
+  "name": "trust-creater",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/bot",
+    "apps/webapp",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev:api": "npm --workspace apps/api run start:dev",
+    "dev:bot": "npm --workspace apps/bot run start:dev",
+    "dev:webapp": "npm --workspace apps/webapp run dev",
+    "prisma:generate": "npm --workspace apps/api run prisma:generate",
+    "prisma:migrate": "npm --workspace apps/api run prisma:migrate",
+    "prisma:seed": "npm --workspace apps/api run prisma:seed"
+  }
+}
