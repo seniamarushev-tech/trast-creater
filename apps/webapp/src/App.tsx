@@ -38,8 +38,11 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1>TRUST CrEATER — Mini App MVP</h1>
-        <p>Telegram Stars игра. 250 Stars = 250 TAU на распределение.</p>
+        <div className="logo">★</div>
+        <div>
+          <h1>TRUST CrEATER — Pixel Stars</h1>
+          <p>Retrowave аркада на Telegram Stars. 250 Stars = 250 TAU для твоей банды артистов.</p>
+        </div>
       </header>
 
       <section>
